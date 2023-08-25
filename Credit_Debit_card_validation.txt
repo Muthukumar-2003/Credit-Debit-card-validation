@@ -1,0 +1,85 @@
+import java.util.*;
+class Credit_Card_Validation
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("ENTER THE CREDIT/DEBIT CARD NUMBER");
+        String str=sc.nextLine();
+        int length=str.length();
+        if(length==15)
+        {
+            if((str.startsWith("34")) || (str.startsWith("37")))
+            {
+                System.out.println("American Express");
+            }
+            else if((str.startsWith("2123")) || (str.startsWith("1800")))
+            {
+                System.out.println("JCB");
+            }
+        }
+        else if ((length==13)||(length==16))
+        {
+            if((str.startsWith("51"))|| (str.startsWith("52"))|| (str.startsWith("53"))|| (str.startsWith("54"))|| (str.startsWith("55")))
+            {
+                System.out.println("Master Card");
+            }
+            else if(str.startsWith("6011"))
+            {
+                System.out.println("Discover Card");
+            }
+            else if(str.startsWith("4"))
+            {
+                System.out.println("Visa");
+            }
+            else if(str.startsWith("3"))
+            {
+                System.out.println("JCB Card");
+            }
+        }
+        else if(length==14)
+        {
+            if((str.startsWith("36")) ||  (str.startsWith("38"))|| (str.startsWith("300"))|| (str.startsWith("301"))|| (str.startsWith("302"))|| (str.startsWith("303"))|| (str.startsWith("304"))|| (str.startsWith("305")))
+            {
+              System.out.println("Diners club and carte blance");  
+           }
+    }
+    else
+    {
+        System.out.println("Invalid Credit/Debit Card Number");
+    }
+    
+     char ch[]=str.toCharArray();
+     int dble[] =new int[ch.length/2];
+     int remain[]=new int[dble.length];
+     int j=0;
+     
+    for(int i=ch.length-2;i>0;i-=2)
+    {
+        dble[j++]=ch[i]-48*2;
+    }
+    int k=0;
+    for(int i=1;i<ch.length;i+=2)
+    {
+        remain[k++]=(ch[i]-48);
+    }
+    int sum1=0;
+    for(int i=0;i<dble.length;i++)
+    {
+        int rem=dble[i]%10;
+        int quo=dble[i]/10;
+        sum1+=quo+rem;
+    }
+    int sum2=0;
+    for(int i=0;i<remain.length;i++)
+    {
+        sum2+=remain[i];
+    
+    }
+    int result=sum1+sum2;
+    if(result%10==0)
+    System.out.println("GIVEN CARD NUMBER IS VALID");
+    else
+    System.out.println("GIVEN CARD NUMBER IS NOT VALID");
+    }
+}
